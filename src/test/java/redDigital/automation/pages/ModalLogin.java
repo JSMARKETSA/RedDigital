@@ -138,32 +138,32 @@ public class ModalLogin extends PageObject {
         System.out.println("Mostrando los resultados...");
         sleep(1000);
         if (reportResults.isVisible()) {
-        List<Sale> saleList = new ArrayList<>();
-        List<WebElement> Resultado = getAllWebDriver().findElements(By.xpath("//table[2]/tbody/tr/td"));
-        System.out.println("Registros Totales " + Resultado.get(3).getText());
-        int Registros_Totales = Integer.parseInt(Resultado.get(3).getText());
-        for (int t = 0; t < Registros_Totales;  t= t+100) {
-                List<WebElement> resultsDiv1 = getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr"));
-                int resultado1 = resultsDiv1.size();
-                for (int i = 1; i <= resultado1; i++) {
-                   Sale sale = new Sale();
-                    sale.setFecha(convertStringDate(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(0).getText()));
-                    sale.setOrigen(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(1).getText());
-                    sale.setDestino(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(2).getText());
-                    sale.setConfirmacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(3).getText());
-                    sale.setMonto(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText());
-                    sale.setCarrier(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(5).getText());
-                    sale.setOperacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(6).getText());
-                    sale.setMedio(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(7).getText());
-                    sale.setIdTerminal(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(8).getText());
-                    saleList.add(sale);
-                }
-                next.get(0).click();
-                sleep(500);
+            List<Sale> saleList = new ArrayList<>();
+            List<WebElement> Resultado = getAllWebDriver().findElements(By.xpath("//table[2]/tbody/tr/td"));
+            System.out.println("Registros Totales " + Resultado.get(3).getText());
+            int Registros_Totales = Integer.parseInt(Resultado.get(3).getText());
+            for (int t = 0; t < Registros_Totales;  t= t+100) {
+                    List<WebElement> resultsDiv1 = getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr"));
+                    int resultado1 = resultsDiv1.size();
+                    for (int i = 1; i <= resultado1; i++) {
+                       Sale sale = new Sale();
+                        sale.setFecha(convertStringDate(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(0).getText()));
+                        sale.setOrigen(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(1).getText());
+                        sale.setDestino(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(2).getText());
+                        sale.setConfirmacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(3).getText());
+                        sale.setMonto(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText());
+                        sale.setCarrier(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(5).getText());
+                        sale.setOperacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(6).getText());
+                        sale.setMedio(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(7).getText());
+                        sale.setIdTerminal(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(8).getText());
+                        saleList.add(sale);
+                    }
+                    next.get(0).click();
+                    sleep(500);
+            }
+            insertarbd(saleList,user);
+            cerrarSesion();
         }
-        insertarbd(saleList,user);
-        cerrarSesion();
-    }
         else
             cerrarSesion();
     }
