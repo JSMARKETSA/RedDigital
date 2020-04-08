@@ -110,6 +110,7 @@ public class ModalLogin extends PageObject {
     private WebDriver getAllWebDriver() {
         WebDriverFacade facade = (WebDriverFacade) getDriver();
 //        facade.withOptions("--headless");
+        facade.withOptions("--no-sandbox");
         facade.withOptions("--disable-dev-shm-usage");
         return facade.getProxiedDriver();
     }
