@@ -109,7 +109,7 @@ public class ModalLogin extends PageObject {
 
     private WebDriver getAllWebDriver() {
         WebDriverFacade facade = (WebDriverFacade) getDriver();
-        facade.withOptions("--headless");
+//        facade.withOptions("--headless");
         return facade.getProxiedDriver();
     }
     public void getUrl() {
@@ -130,7 +130,7 @@ public class ModalLogin extends PageObject {
 
     public void searchResultado(User user) throws InterruptedException, SQLException {
         sleep(2000);
-        fecha1.sendKeys("14/03/2020");
+        fecha1.sendKeys("15/03/2020");
         System.out.println("Ingresando fecha actual...");
         fecha1.sendKeys(Keys.ENTER);
         sleep(800);
