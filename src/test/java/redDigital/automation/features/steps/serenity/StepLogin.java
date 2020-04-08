@@ -1,8 +1,8 @@
 package redDigital.automation.features.steps.serenity;
 
+
 import net.thucydides.core.annotations.Step;
 import redDigital.automation.pages.ModalLogin;
-//import redDigital.automation.util.DataBaseValidations;
 
 import java.sql.SQLException;
 
