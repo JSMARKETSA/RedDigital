@@ -109,14 +109,11 @@ public class ModalLogin extends PageObject {
 
     private WebDriver getAllWebDriver() {
         WebDriverFacade facade = (WebDriverFacade) getDriver();
-//        facade.withOptions("--headless");
-        facade.withOptions("--no-sandbox");
-        facade.withOptions("--disable-dev-shm-usage");
+        facade.withOptions("--headless");
         return facade.getProxiedDriver();
     }
     public void getUrl() {
         getAllWebDriver().get(getConfiguration(PROPERTY_HOME_URL));
-        getAllWebDriver().manage().window().maximize();
     }
 
     public String fechaActual(){
