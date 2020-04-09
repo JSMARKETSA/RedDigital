@@ -53,6 +53,15 @@ public class ModalLogin extends PageObject {
     private List<WebElement> SignOff;
 
 
+    private WebDriver getAllWebDriver() {
+        WebDriverFacade facade = (WebDriverFacade) getDriver();
+        facade.withOptions("--headless");
+        return facade.getProxiedDriver();
+    }
+    public void getUrl() {
+        getAllWebDriver().get(getConfiguration(PROPERTY_HOME_URL));
+    }
+
     public List<User> conexionbd() throws InterruptedException, SQLException {
         conexion cn=new conexion();
         Statement st;
@@ -107,14 +116,6 @@ public class ModalLogin extends PageObject {
         sleep(2000);
     }
 
-    private WebDriver getAllWebDriver() {
-        WebDriverFacade facade = (WebDriverFacade) getDriver();
-        facade.withOptions("--headless");
-        return facade.getProxiedDriver();
-    }
-    public void getUrl() {
-        getAllWebDriver().get(getConfiguration(PROPERTY_HOME_URL));
-    }
 
     public String fechaActual(){
         Date fecha = new Date(Calendar.getInstance().getTimeInMillis());
@@ -129,7 +130,7 @@ public class ModalLogin extends PageObject {
 
     public void searchResultado(User user) throws InterruptedException, SQLException {
         sleep(2000);
-        fecha1.sendKeys("15/03/2020");
+        fecha1.sendKeys(fechaActual());
         System.out.println("Ingresando fecha actual...");
         fecha1.sendKeys(Keys.ENTER);
         sleep(800);
