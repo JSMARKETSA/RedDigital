@@ -69,7 +69,7 @@ public class ModalLogin extends PageObject {
         List<User> users = new ArrayList<>();
         try {
             st=cn.con.createStatement();
-            rs=st.executeQuery("select * from user");
+            rs=st.executeQuery("select * from users");
             while (rs.next()) {
                 System.out.println(rs.getString("usuario")+" " +rs.getString("password"));
                 User user = new User(rs.getString("usuario"), rs.getString("password"));
@@ -130,23 +130,26 @@ public class ModalLogin extends PageObject {
 
     public void searchResultado(User user) throws InterruptedException, SQLException {
         sleep(2000);
-        fecha1.sendKeys(fechaActual());
-        System.out.println("Ingresando fecha actual...");
-        fecha1.sendKeys(Keys.ENTER);
-        sleep(800);
-        btnConsutar.click();
-        System.out.println("Mostrando los resultados...");
-        sleep(1000);
-        if (reportResults.isVisible()) {
-            List<Sale> saleList = new ArrayList<>();
-            List<WebElement> Resultado = getAllWebDriver().findElements(By.xpath("//table[2]/tbody/tr/td"));
-            System.out.println("Registros Totales " + Resultado.get(3).getText());
-            int Registros_Totales = Integer.parseInt(Resultado.get(3).getText());
-            for (int t = 0; t < Registros_Totales;  t= t+100) {
+        for (int day=10;day<32;day++) {
+            fecha1.clear();
+            sleep(500);
+            fecha1.sendKeys(day+"/03/2020");
+            System.out.println("Ingresando fecha actual...: "+""+day+"/03/2020");
+            fecha1.sendKeys(Keys.ENTER);
+            sleep(800);
+            btnConsutar.click();
+            System.out.println("Mostrando los resultados...");
+            sleep(1000);
+            if (reportResults.isVisible()) {
+                List<Sale> saleList = new ArrayList<>();
+                List<WebElement> Resultado = getAllWebDriver().findElements(By.xpath("//table[2]/tbody/tr/td"));
+                System.out.println("Registros Totales " + Resultado.get(3).getText());
+                int Registros_Totales = Integer.parseInt(Resultado.get(3).getText());
+                for (int t = 0; t < Registros_Totales;  t= t+100) {
                     List<WebElement> resultsDiv1 = getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr"));
                     int resultado1 = resultsDiv1.size();
                     for (int i = 1; i <= resultado1; i++) {
-                       Sale sale = new Sale();
+                        Sale sale = new Sale();
                         sale.setFecha(convertStringDate(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(0).getText()));
                         sale.setOrigen(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(1).getText());
                         sale.setDestino(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(2).getText());
@@ -160,12 +163,13 @@ public class ModalLogin extends PageObject {
                     }
                     next.get(0).click();
                     sleep(500);
+                }
+                insertarbd(saleList,user);
             }
-            insertarbd(saleList,user);
-            cerrarSesion();
         }
-        else
-            cerrarSesion();
+        cerrarSesion();
+//            else
+//                cerrarSesion();
     }
 
     public void insertarbd( List<Sale> sales,User user) throws SQLException {
