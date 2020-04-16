@@ -103,4 +103,11 @@ public class Sale  {
     public void setIdTerminal(String idTerminal) {
         this.idTerminal = idTerminal;
     }
+
+    @Override
+    public String toString() {
+        return "Sale{" +
+                "fecha=" + fecha +
+                '}';
+    }
 }

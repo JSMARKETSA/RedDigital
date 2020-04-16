@@ -207,8 +207,9 @@ public class ModalLogin extends PageObject {
         if (null == ts) {
             salesFilter =  sales;
         } else {
-
-            salesFilter =  sales.parallelStream().filter(sale -> sale.getFecha().after(finalTs)).collect(Collectors.toList());
+            System.out.println("la fecha sale: "+sales.toString());
+            salesFilter =  sales.parallelStream().
+                    filter(sale -> sale.getFecha().after(finalTs)).collect(Collectors.toList());
         }
             String query="insert into sale " +
                 "(fecha, origen, destino, confirmacion, monto, carrier, operacion, medio, idTerminal)" +
