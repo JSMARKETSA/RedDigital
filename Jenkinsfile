@@ -3,7 +3,7 @@ def SCENARIO_PARAM
 pipeline {
     agent any    
     parameters {
-      string(name: 'scenarioParam',
+      string(name: "scenarioParam",
         defaultValue: "@login",
         description: 'Ingresa escenario de prueba')
     }
