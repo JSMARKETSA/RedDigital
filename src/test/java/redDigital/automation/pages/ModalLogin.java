@@ -142,7 +142,7 @@ public class ModalLogin extends PageObject {
 
     public void searchResultado(User user) throws InterruptedException, SQLException {
         sleep(2000);
-        for (int day=10;day<32;day++) {
+        for (int day=10;day<19;day++) {
             fecha1.clear();
             sleep(500);
             fecha1.sendKeys(day+"/03/2020");
@@ -192,7 +192,7 @@ public class ModalLogin extends PageObject {
         Timestamp ts = null;
         try {
             st=cn.con.createStatement();
-            rs=st.executeQuery("select max(fecha) from sale where origen = ".concat(user.getNombre()) );
+            rs=st.executeQuery("select max(fecha) from sale where origen = "+".concat(user.getNombre())");
             while (rs.next()) {
                 ts = rs.getTimestamp(1);
                 System.out.println(rs.getString(" obtener fecha: " + ts));
