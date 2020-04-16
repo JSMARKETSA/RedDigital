@@ -71,7 +71,7 @@ public class ModalLogin extends PageObject {
             st=cn.con.createStatement();
             rs=st.executeQuery("select * from users");
             while (rs.next()) {
-//                System.out.println(rs.getString("usuario")+" " +rs.getString("password"));
+                System.out.println(rs.getString("usuario")+" " +rs.getString("password"));
                 User user = new User(rs.getString("usuario"), rs.getString("password"));
                 users.add(user);
             }
