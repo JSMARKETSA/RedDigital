@@ -11,9 +11,9 @@ pipeline {
         stage(pruebas) {
         steps {
           script {
-            SCENARIO_PARAM = '%params.scenarioParam%'
-            bat 'mvn clean install verify -Dcucumber.options="--tags %SCENARIO_PARAM%"'
-//                bat  'mvn clean install verify -Dcucumber.options="--tags @login"'
+            SCENARIO_PARAM = "${params.scenarioParam}"
+//             bat 'mvn clean install verify -Dcucumber.options="--tags %SCENARIO_PARAM%"'
+               bat  'mvn clean install verify -Dcucumber.options="--tags @login"'
           }
         }
       }
