@@ -13,7 +13,9 @@ pipeline {
           script {
             SCENARIO_PARAM = "${params.scenarioParam}"
 //             sh "pwd"
-            bat "mvn clean verify -Dcucumber.options='--tags ${SCENARIO_PARAM}'"
+//             bat "mvn clean install"
+            bat "mvn clean verify -Dcucumber.options='--tags @login}'"
+//             bat "mvn clean verify -Dcucumber.options='--tags ${SCENARIO_PARAM}'"
           }
         }
       }
