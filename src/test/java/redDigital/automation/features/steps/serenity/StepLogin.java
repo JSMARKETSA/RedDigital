@@ -12,7 +12,7 @@ public class StepLogin {
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>LOGIN FROM HOME<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     @Step
-    public void getUrl() {
+    public void getUrl() throws InterruptedException {
         step.getUrl();
     }
     @Step

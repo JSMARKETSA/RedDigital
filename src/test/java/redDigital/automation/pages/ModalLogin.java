@@ -1,4 +1,5 @@
 package redDigital.automation.pages;
+
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.pages.PageObject;
 import net.thucydides.core.webdriver.WebDriverFacade;
@@ -6,24 +7,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.FindBy;
-//import redDigital.automation.util.DataBaseValidations;
-import org.yecht.Data;
 import redDigital.automation.entities.Sale;
 import redDigital.automation.entities.User;
-//import redDigital.automation.util.conexion;
-
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.lang.Thread.sleep;
 import static redDigital.automation.util.Constants.PROPERTY_HOME_URL;
 import static redDigital.automation.util.PropertyUtil.getConfiguration;
+
 
 public class ModalLogin extends PageObject {
 
@@ -54,31 +53,28 @@ public class ModalLogin extends PageObject {
 
 
 
-
     public class conexion {
         public Connection con;
         public conexion(){
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 con= DriverManager.getConnection("jdbc:sqlserver://JSMARKET\\JSMSPROD;databaseName=RedDigital","ROBOTJSMS","R0b0t_JSMS");
-                System.out.println("conexion hecha sql");
-
+                System.out.println("conexion hecha sqlServer");
             } catch (Exception e) {
                 System.err.println("Error:" +e);
             }
         }
     }
 
-
-
-
     private WebDriver getAllWebDriver() {
         WebDriverFacade facade = (WebDriverFacade) getDriver();
         facade.withOptions("--headless");
         return facade.getProxiedDriver();
     }
-    public void getUrl() {
+
+    public void getUrl() throws InterruptedException {
         getAllWebDriver().get(getConfiguration(PROPERTY_HOME_URL));
+        sleep(1500);
     }
 
     public List<User> conexionbd() throws InterruptedException, SQLException {
@@ -90,7 +86,6 @@ public class ModalLogin extends PageObject {
             st=cn.con.createStatement();
             rs=st.executeQuery("select * from users");
             while (rs.next()) {
-                System.out.println(rs.getString("usuario")+" " +rs.getString("password"));
                 User user = new User(rs.getString("usuario"), rs.getString("password"));
                 users.add(user);
             }
@@ -118,21 +113,19 @@ public class ModalLogin extends PageObject {
     }
 
     public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
-        sleep(2000);
+        sleep(1000);
         inputTelefono.sendKeys(usuario.getNombre());
-        System.out.println("ingresando el usuario :" +usuario.getNombre());
         sleep(500);
         inputPassword.sendKeys(usuario.getPassword());
-        System.out.println("ingresando el password :" +usuario.getPassword());
         sleep(500);
         btnEntrar.click();
+        System.out.println("El usuario ingreso correctamente :" +usuario.getNombre());
     }
 
     public void cerrarSesion() throws InterruptedException {
-        sleep(1000);
-        System.out.println("ingresando numero de telfono y contraseña...");
+        sleep(500);
         SignOff.get(0).click();
-        sleep(2000);
+        sleep(1000);
     }
 
 
