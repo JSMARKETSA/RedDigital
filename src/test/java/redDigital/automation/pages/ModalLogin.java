@@ -142,7 +142,7 @@ public class ModalLogin extends PageObject {
 
     public void searchResultado(User user) throws InterruptedException, SQLException {
         sleep(2000);
-        for (int day=10;day<19;day++) {
+        for (int day=10;day<32;day++) {
             fecha1.clear();
             sleep(500);
             fecha1.sendKeys(day+"/03/2020");
