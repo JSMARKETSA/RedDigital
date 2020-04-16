@@ -192,7 +192,7 @@ public class ModalLogin extends PageObject {
         Timestamp ts = null;
         try {
             st=cn.con.createStatement();
-            rs=st.executeQuery("select max(fecha) from sale where origen = '" + user.getNombre()+"'");
+            rs=st.executeQuery("select max(fecha) from sale where origen = '" + user.getNombre()+"' or origen ='" + user.getNombre()+"'" );
             while (rs.next()) {
                 System.out.println("la fecha llega aqui");
                 ts = rs.getTimestamp(1);
