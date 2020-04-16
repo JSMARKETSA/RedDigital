@@ -12,7 +12,7 @@ pipeline {
         steps {
           script {
             SCENARIO_PARAM = "${params.scenarioParam}"
-            sh "pwd"
+//             sh "pwd"
             sh "mvn clean verify -Dcucumber.options='--tags ${SCENARIO_PARAM}'"
           }
         }
