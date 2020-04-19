@@ -142,11 +142,11 @@ public class ModalLogin extends PageObject {
 
     public void searchResultado(User user) throws InterruptedException, SQLException {
         sleep(2000);
-        for (int day=1;day<10;day++) {
+        for (int day=10;day<20;day++) {
             fecha1.clear();
             sleep(500);
-            fecha1.sendKeys("0"+day+"/04/2020");
-            System.out.println("Ingresando fecha actual...: "+"0"+day+"/04/2020");
+            fecha1.sendKeys(day+"/04/2020");
+            System.out.println("Ingresando fecha actual...: " +day+"/04/2020");
             fecha1.sendKeys(Keys.ENTER);
             sleep(800);
             btnConsutar.click();
