@@ -115,17 +115,17 @@ public class ModalLogin extends PageObject {
     public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
         sleep(1000);
         inputTelefono.sendKeys(usuario.getNombre());
-        sleep(500);
+        sleep(400);
         inputPassword.sendKeys(usuario.getPassword());
-        sleep(500);
+        sleep(400);
         btnEntrar.click();
         System.out.println("El usuario ingreso correctamente :" +usuario.getNombre());
     }
 
     public void cerrarSesion() throws InterruptedException {
-        sleep(500);
+        sleep(300);
         SignOff.get(0).click();
-        sleep(1000);
+        sleep(800);
     }
 
 
@@ -141,47 +141,43 @@ public class ModalLogin extends PageObject {
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOGIN <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     public void searchResultado(User user) throws InterruptedException, SQLException {
-        sleep(2000);
-        for (int day=10;day<11;day++) {
-            fecha1.clear();
-            sleep(500);
-            fecha1.sendKeys(day+"/04/2020");
-            System.out.println("Ingresando fecha actual...: " +day+"/04/2020");
-            fecha1.sendKeys(Keys.ENTER);
-            sleep(800);
-            btnConsutar.click();
-            System.out.println("Mostrando los resultados...");
-            sleep(1000);
-            if (reportResults.isVisible()) {
-                List<Sale> saleList = new ArrayList<>();
-                List<WebElement> Resultado = getAllWebDriver().findElements(By.xpath("//table[2]/tbody/tr/td"));
-                System.out.println("Registros Totales " + Resultado.get(3).getText());
-                int Registros_Totales = Integer.parseInt(Resultado.get(3).getText());
-                for (int t = 0; t < Registros_Totales;  t= t+100) {
-                    List<WebElement> resultsDiv1 = getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr"));
-                    int resultado1 = resultsDiv1.size();
-                    for (int i = 1; i <= resultado1; i++) {
-                        Sale sale = new Sale();
-                        sale.setFecha(convertStringDate(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(0).getText()));
-                        sale.setOrigen(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(1).getText());
-                        sale.setDestino(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(2).getText());
-                        sale.setConfirmacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(3).getText());
-                        sale.setMonto(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText());
-                        sale.setCarrier(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(5).getText());
-                        sale.setOperacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(6).getText());
-                        sale.setMedio(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(7).getText());
-                        sale.setIdTerminal(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(8).getText());
-                        saleList.add(sale);
-                    }
-                    next.get(0).click();
-                    sleep(500);
+        sleep(1800);
+        fecha1.sendKeys("15/03/2020");
+        System.out.println("Ingresando fecha actual...");
+        fecha1.sendKeys(Keys.ENTER);
+        sleep(800);
+        btnConsutar.click();
+        System.out.println("Mostrando los resultados...");
+        sleep(800);
+        if (reportResults.isVisible()) {
+            List<Sale> saleList = new ArrayList<>();
+            List<WebElement> Resultado = getAllWebDriver().findElements(By.xpath("//table[2]/tbody/tr/td"));
+            System.out.println("Registros Totales " + Resultado.get(3).getText());
+            int Registros_Totales = Integer.parseInt(Resultado.get(3).getText());
+            for (int t = 0; t < Registros_Totales;  t= t+100) {
+                List<WebElement> resultsDiv1 = getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr"));
+                int resultado1 = resultsDiv1.size();
+                for (int i = 1; i <= resultado1; i++) {
+                    Sale sale = new Sale();
+                    sale.setFecha(convertStringDate(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(0).getText()));
+                    sale.setOrigen(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(1).getText());
+                    sale.setDestino(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(2).getText());
+                    sale.setConfirmacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(3).getText());
+                    sale.setMonto(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText());
+                    sale.setCarrier(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(5).getText());
+                    sale.setOperacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(6).getText());
+                    sale.setMedio(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(7).getText());
+                    sale.setIdTerminal(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(8).getText());
+                    saleList.add(sale);
                 }
-                insertarbd(saleList,user);
+                next.get(0).click();
+                sleep(500);
             }
+            insertarbd(saleList,user);
+            cerrarSesion();
         }
-        cerrarSesion();
-//            else
-//                cerrarSesion();
+        else
+            cerrarSesion();
     }
 
     public void insertarbd( List<Sale> sales,User user) throws SQLException {
