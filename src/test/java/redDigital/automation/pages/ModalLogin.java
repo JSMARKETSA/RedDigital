@@ -149,55 +149,63 @@ public class ModalLogin extends PageObject {
         System.out.println("numero correcto: "+ montoValor );
         return montoValor;
     }
-    
+
+
+
     public void searchResultado(User user) throws InterruptedException, SQLException {
         sleep(1800);
-        fecha1.sendKeys("18/04/2020");
-        System.out.println("Ingresando fecha actual...18/04/2020");
-        fecha1.sendKeys(Keys.ENTER);
-        sleep(800);
-        btnConsutar.click();
-        System.out.println("Mostrando los resultados...");
-        sleep(800);
-        if (reportResults.isVisible()) {
-            List<Sale> saleList = new ArrayList<>();
-            List<WebElement> Resultado = getAllWebDriver().findElements(By.xpath("//table[2]/tbody/tr/td"));
-            System.out.println("Registros Totales " + Resultado.get(3).getText());
-            int Registros_Totales = Integer.parseInt(Resultado.get(3).getText());
-            for (int t = 0; t < Registros_Totales;  t= t+100) {
-                List<WebElement> resultsDiv1 = getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr"));
-                int resultado1 = resultsDiv1.size();
-                for (int i = 1; i <= resultado1; i++) {
-                    Sale sale = new Sale();
-                    sale.setFecha(convertStringDate(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(0).getText()));
-                    sale.setOrigen(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(1).getText());
-                    sale.setDestino(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(2).getText());
-                    sale.setConfirmacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(3).getText());
-                    sale.setMonto(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText());
-                    sale.setCarrier(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(5).getText());
-                    sale.setOperacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(6).getText());
-                    sale.setMedio(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(7).getText());
-                    sale.setIdTerminal(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(8).getText());
-                    String[] tipo= getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText().split(" ");
-                    String valor =tipo[1];
-                    String tipoValor = null;
-                    if ("-S/".equals(tipo[0])) {
-                        tipoValor = "Salida";
+        for (int day=1;day<10;day++) {
+            fecha1.clear();
+            sleep(500);
+            fecha1.sendKeys("0"+day+"/04/2020");
+            System.out.println("Ingresando fecha actual...: "+"0"+day+"/04/2020");
+            fecha1.sendKeys(Keys.ENTER);
+            sleep(800);
+            btnConsutar.click();
+            System.out.println("Mostrando los resultados...");
+            sleep(1000);
+            if (reportResults.isVisible()) {
+                List<Sale> saleList = new ArrayList<>();
+                List<WebElement> Resultado = getAllWebDriver().findElements(By.xpath("//table[2]/tbody/tr/td"));
+                System.out.println("Registros Totales " + Resultado.get(3).getText());
+                int Registros_Totales = Integer.parseInt(Resultado.get(3).getText());
+                for (int t = 0; t < Registros_Totales;  t= t+100) {
+                    List<WebElement> resultsDiv1 = getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr"));
+                    int resultado1 = resultsDiv1.size();
+                    for (int i = 1; i <= resultado1; i++) {
+                        Sale sale = new Sale();
+                        sale.setFecha(convertStringDate(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(0).getText()));
+                        sale.setOrigen(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(1).getText());
+                        sale.setDestino(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(2).getText());
+                        sale.setConfirmacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(3).getText());
+                        sale.setMonto(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText());
+                        sale.setCarrier(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(5).getText());
+                        sale.setOperacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(6).getText());
+                        sale.setMedio(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(7).getText());
+                        sale.setIdTerminal(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(8).getText());
+                        String[] tipo= getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText().split(" ");
+                        String valor =tipo[1];
+                        String tipoValor = null;
+                        if ("-S/".equals(tipo[0])) {
+                            tipoValor = "Salida";
+                        }
+                        else {
+                            tipoValor = "Entrada";}
+                        sale.setTipo(tipoValor);
+                        sale.setMontoValor(conversion(valor));
+
+
+                        saleList.add(sale);
                     }
-                    else {
-                         tipoValor = "Entrada";}
-                    sale.setTipo(tipoValor);
-                    sale.setMontoValor(conversion(valor));
-                    saleList.add(sale);
+                    next.get(0).click();
+                    sleep(500);
                 }
-                next.get(0).click();
-                sleep(500);
+                insertarbd(saleList,user);
             }
-            insertarbd(saleList,user);
-            cerrarSesion();
         }
-        else
-            cerrarSesion();
+        cerrarSesion();
+//            else
+//                cerrarSesion();
     }
 
     public void insertarbd( List<Sale> sales,User user) throws SQLException {
