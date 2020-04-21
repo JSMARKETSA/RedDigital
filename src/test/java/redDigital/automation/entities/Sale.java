@@ -15,13 +15,13 @@ public class Sale  {
     private String medio;
     private String idTerminal;
     private String tipo;
-    private Double montoValor;
+    private String montoValor;
 
     public Sale() {
         
     }
     
-    public Sale(Timestamp fecha, String origen, String destino, String confirmacion, String monto, String carrier, String operacion, String medio, String idTerminal, String tipo, Double montoValor) {
+    public Sale(Timestamp fecha, String origen, String destino, String confirmacion, String monto, String carrier, String operacion, String medio, String idTerminal, String tipo, String montoValor) {
         this.fecha = fecha;
         this.origen = origen;
         this.destino = destino;
@@ -43,11 +43,11 @@ public class Sale  {
         this.tipo = tipo;
     }
 
-    public Double getMontoValor() {
+    public String getMontoValor() {
         return montoValor;
     }
 
-    public void setMontoValor(double montoValor) {
+    public void setMontoValor(String montoValor) {
         this.montoValor = montoValor;
     }
 

@@ -170,7 +170,7 @@ public class ModalLogin extends PageObject {
                     sale.setIdTerminal(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(8).getText());
 
                     String[] tipo= getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText().split(" ");
-                    double montoValor =Double.parseDouble(tipo[1]);
+                    String montoValor =tipo[1];
                     String tipoValor = null;
                     if ("-S/".equals(tipo[0])) {
                         tipoValor = "Salida";
@@ -237,7 +237,7 @@ public class ModalLogin extends PageObject {
                 preparedStmt.setString(8, sale.getMedio());
                 preparedStmt.setString(9, sale.getIdTerminal());
                 preparedStmt.setString(10, sale.getTipo());
-                preparedStmt.setDouble(11, sale.getMontoValor());
+                preparedStmt.setString(11, sale.getMontoValor());
 
                 preparedStmt.execute();
                 } catch (Exception e) {
