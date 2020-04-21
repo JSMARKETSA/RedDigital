@@ -178,7 +178,6 @@ public class ModalLogin extends PageObject {
                     sale.setOperacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(6).getText());
                     sale.setMedio(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(7).getText());
                     sale.setIdTerminal(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(8).getText());
-
                     String[] tipo= getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText().split(" ");
                     String valor =tipo[1];
                     String tipoValor = null;
@@ -188,9 +187,7 @@ public class ModalLogin extends PageObject {
                     else {
                          tipoValor = "Entrada";}
                     sale.setTipo(tipoValor);
-                    String a="1.250,50";
-                    sale.setMontoValor(conversion(a));
-
+                    sale.setMontoValor(conversion(valor));
                     saleList.add(sale);
                 }
                 next.get(0).click();
