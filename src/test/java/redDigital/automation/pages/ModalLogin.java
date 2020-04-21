@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import redDigital.automation.entities.Sale;
 import redDigital.automation.entities.User;
+
+import java.math.BigDecimal;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -170,7 +172,8 @@ public class ModalLogin extends PageObject {
                     sale.setIdTerminal(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(8).getText());
 
                     String[] tipo= getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText().split(" ");
-                    String montoValor =tipo[1];
+                    String valor =tipo[1];
+                    BigDecimal montoValor=new BigDecimal(valor);
                     String tipoValor = null;
                     if ("-S/".equals(tipo[0])) {
                         tipoValor = "Salida";
@@ -237,7 +240,7 @@ public class ModalLogin extends PageObject {
                 preparedStmt.setString(8, sale.getMedio());
                 preparedStmt.setString(9, sale.getIdTerminal());
                 preparedStmt.setString(10, sale.getTipo());
-                preparedStmt.setString(11, sale.getMontoValor());
+                preparedStmt.setBigDecimal(11, sale.getMontoValor());
 
                 preparedStmt.execute();
                 } catch (Exception e) {

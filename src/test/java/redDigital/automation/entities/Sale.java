@@ -1,6 +1,7 @@
 package redDigital.automation.entities;
 
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Sale  {
@@ -15,13 +16,13 @@ public class Sale  {
     private String medio;
     private String idTerminal;
     private String tipo;
-    private String montoValor;
+    private BigDecimal montoValor;
 
     public Sale() {
         
     }
     
-    public Sale(Timestamp fecha, String origen, String destino, String confirmacion, String monto, String carrier, String operacion, String medio, String idTerminal, String tipo, String montoValor) {
+    public Sale(Timestamp fecha, String origen, String destino, String confirmacion, String monto, String carrier, String operacion, String medio, String idTerminal, String tipo, BigDecimal montoValor) {
         this.fecha = fecha;
         this.origen = origen;
         this.destino = destino;
@@ -43,11 +44,11 @@ public class Sale  {
         this.tipo = tipo;
     }
 
-    public String getMontoValor() {
+    public BigDecimal getMontoValor() {
         return montoValor;
     }
 
-    public void setMontoValor(String montoValor) {
+    public void setMontoValor(BigDecimal montoValor) {
         this.montoValor = montoValor;
     }
 
