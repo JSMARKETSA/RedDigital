@@ -168,6 +168,18 @@ public class ModalLogin extends PageObject {
                     sale.setOperacion(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(6).getText());
                     sale.setMedio(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(7).getText());
                     sale.setIdTerminal(getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(8).getText());
+
+                    String[] tipo= getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText().split(" ");
+                    int valorMonto =Integer.parseInt(tipo[1]);
+                    String tipoValor = null;
+                    if ("-S/".equals(tipo[0])) {
+                        tipoValor = "Salida";
+                    }
+                    else {
+                         tipoValor = "Entrada";}
+                    sale.setTipo(tipoValor);
+                    sale.setMontoValor(valorMonto);
+
                     saleList.add(sale);
                 }
                 next.get(0).click();
@@ -210,8 +222,8 @@ public class ModalLogin extends PageObject {
                     filter(sale -> sale.getFecha().after(finalTs)).collect(Collectors.toList());
         }
             String query="insert into sale " +
-                "(fecha, origen, destino, confirmacion, monto, carrier, operacion, medio, idTerminal)" +
-                " VALUES (?,?,?,?,?,?,?,?,?)";
+                "(fecha, origen, destino, confirmacion, monto, carrier, operacion, medio, idTerminal, tipo, montoValor)" +
+                " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         salesFilter.forEach(sale -> {
             try {
                 PreparedStatement preparedStmt = cn.con.prepareStatement(query);
@@ -224,6 +236,9 @@ public class ModalLogin extends PageObject {
                 preparedStmt.setString(7, sale.getOperacion());
                 preparedStmt.setString(8, sale.getMedio());
                 preparedStmt.setString(9, sale.getIdTerminal());
+                preparedStmt.setString(10, sale.getTipo());
+                preparedStmt.setInt(11, sale.getMontoValor());
+
                 preparedStmt.execute();
                 } catch (Exception e) {
                     System.out.println(e);

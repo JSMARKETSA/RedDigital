@@ -1,7 +1,6 @@
 package redDigital.automation.entities;
 
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Sale  {
@@ -15,12 +14,14 @@ public class Sale  {
     private String operacion;
     private String medio;
     private String idTerminal;
+    private String tipo;
+    private int montoValor;
 
     public Sale() {
         
     }
-
-    public Sale(Timestamp fecha, String origen, String destino, String confirmacion, String monto, String carrier, String operacion, String medio, String idTerminal) {
+    
+    public Sale(Timestamp fecha, String origen, String destino, String confirmacion, String monto, String carrier, String operacion, String medio, String idTerminal, String tipo, int montoValor) {
         this.fecha = fecha;
         this.origen = origen;
         this.destino = destino;
@@ -30,7 +31,27 @@ public class Sale  {
         this.operacion = operacion;
         this.medio = medio;
         this.idTerminal = idTerminal;
+        this.tipo = tipo;
+        this.montoValor = montoValor;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getMontoValor() {
+        return montoValor;
+    }
+
+    public void setMontoValor(int montoValor) {
+        this.montoValor = montoValor;
+    }
+
+
 
     public Timestamp getFecha() {
         return fecha;
@@ -63,7 +84,7 @@ public class Sale  {
     public void setConfirmacion(String confirmacion) {
         this.confirmacion = confirmacion;
     }
-
+    
     public String getMonto() {
         return monto;
     }
@@ -104,6 +125,8 @@ public class Sale  {
         this.idTerminal = idTerminal;
     }
 
+    
+    
     @Override
     public String toString() {
         return "Sale{" +
