@@ -188,7 +188,7 @@ public class ModalLogin extends PageObject {
                     else {
                          tipoValor = "Entrada";}
                     sale.setTipo(tipoValor);
-                    sale.setMontoValor(conversion(valor));
+                    sale.setMontoValor(conversion("1.250,50"));
 
                     saleList.add(sale);
                 }
