@@ -142,6 +142,14 @@ public class ModalLogin extends PageObject {
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOGIN <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+    public BigDecimal conversion (String numerofeo) {
+        BigDecimal x = new BigDecimal(numerofeo.split(",")[0].replace(".", ""));//coge la parte entera y si existe le quito uel punto
+        BigDecimal d = new BigDecimal("."+numerofeo.split(",")[1]); // la parte decimal
+        BigDecimal montoValor = x.add(d); // sumna de los valores
+        System.out.println("numero correcto: "+ montoValor );
+        return montoValor;
+    }
+    
     public void searchResultado(User user) throws InterruptedException, SQLException {
         sleep(1800);
         fecha1.sendKeys("18/04/2020");
@@ -173,7 +181,6 @@ public class ModalLogin extends PageObject {
 
                     String[] tipo= getAllWebDriver().findElements(By.xpath("//table[1]/tbody/tr[" + i + "]" + "/td")).get(4).getText().split(" ");
                     String valor =tipo[1];
-                    BigDecimal montoValor=new BigDecimal(valor);
                     String tipoValor = null;
                     if ("-S/".equals(tipo[0])) {
                         tipoValor = "Salida";
@@ -181,7 +188,7 @@ public class ModalLogin extends PageObject {
                     else {
                          tipoValor = "Entrada";}
                     sale.setTipo(tipoValor);
-                    sale.setMontoValor(montoValor);
+                    sale.setMontoValor(conversion(valor));
 
                     saleList.add(sale);
                 }
