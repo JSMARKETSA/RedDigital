@@ -107,8 +107,7 @@ public class ModalLogin extends PageObject {
                 if (errorUser.isVisible()){
                     System.out.println(errorUser.getText());}
                 else
-                    System.out.println("Ingreso correctamente");
-                    searchResultado(user);
+                searchResultado(user);
             } catch (InterruptedException | SQLException e) {
                 e.printStackTrace();
             }
@@ -116,14 +115,13 @@ public class ModalLogin extends PageObject {
     }
 
     public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
-        System.out.println("El Pusher es :" +usuario.getNombre());
-        sleep(500);
+        sleep(1000);
         inputTelefono.sendKeys(usuario.getNombre());
-        sleep(200);
+        sleep(400);
         inputPassword.sendKeys(usuario.getPassword());
-        sleep(200);
+        sleep(400);
         btnEntrar.click();
-
+        System.out.println("El usuario ingreso correctamente :" +usuario.getNombre());
     }
 
     public void cerrarSesion() throws InterruptedException {
@@ -155,7 +153,7 @@ public class ModalLogin extends PageObject {
 
 
     public void searchResultado(User user) throws InterruptedException, SQLException {
-        sleep(1200);
+        sleep(1800);
         for (int day=10;day<24;day++) {
             fecha1.clear();
             sleep(500);
@@ -195,6 +193,8 @@ public class ModalLogin extends PageObject {
                             tipoValor = "Entrada";}
                         sale.setTipo(tipoValor);
                         sale.setMontoValor(conversion(valor));
+
+
                         saleList.add(sale);
                     }
                     next.get(0).click();
