@@ -117,7 +117,7 @@ public class ModalLogin extends PageObject {
     public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
         sleep(1000);
 //        inputTelefono.sendKeys(usuario.getNombre());
-        inputTelefono.sendKeys("996008098"); //    950449605
+        inputTelefono.sendKeys("950449605"); //
         sleep(400);
 //        inputPassword.sendKeys(usuario.getPassword());
         inputPassword.sendKeys("1234");
