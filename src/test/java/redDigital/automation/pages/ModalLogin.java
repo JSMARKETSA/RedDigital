@@ -106,9 +106,8 @@ public class ModalLogin extends PageObject {
                 ejecutarPruebas(user);
                 if (errorUser.isVisible()){
                     System.out.println(errorUser.getText());}
-                else
-                    System.out.println("Ingreso correctamente");
-                    searchResultado(user);
+                System.out.println("Ingreso correctamente");
+                searchResultado(user);
             } catch (InterruptedException | SQLException e) {
                 e.printStackTrace();
             }
@@ -117,7 +116,7 @@ public class ModalLogin extends PageObject {
 
     public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
         System.out.println("El Pusher es :" +usuario.getNombre());
-        sleep(1000);
+        sleep(500);
         inputTelefono.sendKeys(usuario.getNombre());
         sleep(200);
         inputPassword.sendKeys(usuario.getPassword());
