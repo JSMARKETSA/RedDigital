@@ -106,8 +106,10 @@ public class ModalLogin extends PageObject {
                 ejecutarPruebas(user);
                 if (errorUser.isVisible()){
                     System.out.println(errorUser.getText());}
+
                 else
-                searchResultado(user);
+                    System.out.println("El usuario ingreso correctamente");
+                    searchResultado(user);
             } catch (InterruptedException | SQLException e) {
                 e.printStackTrace();
             }
@@ -115,15 +117,11 @@ public class ModalLogin extends PageObject {
     }
 
     public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
-        sleep(1000);
-//        inputTelefono.sendKeys(usuario.getNombre());
-        inputTelefono.sendKeys("950449605"); //
-        sleep(400);
-//        inputPassword.sendKeys(usuario.getPassword());
-        inputPassword.sendKeys("1234");
-        sleep(400);
+        System.out.println("El pusher es :" +usuario.getNombre());
+        inputTelefono.sendKeys(usuario.getNombre());
+        inputPassword.sendKeys(usuario.getPassword());
         btnEntrar.click();
-        System.out.println("El usuario ingreso correctamente :" +usuario.getNombre());
+
     }
 
     public void cerrarSesion() throws InterruptedException {
@@ -155,19 +153,17 @@ public class ModalLogin extends PageObject {
 
 
     public void searchResultado(User user) throws InterruptedException, SQLException {
-        sleep(1800);
-//        for (int day=10;day<24;day++) {
-        for (int day=1;day<10;day++) {
+        sleep(1200);
+        for (int day=10;day<24;day++) {
             fecha1.clear();
-            sleep(500);
-//            fecha1.sendKeys(+day+"/04/2020");
-            fecha1.sendKeys("0"+day+"/04/2020");
+            sleep(400);
+            fecha1.sendKeys(+day+"/04/2020");
             System.out.println("Ingresando fecha actual...: " +day+"/04/2020");
             fecha1.sendKeys(Keys.ENTER);
-            sleep(800);
+            sleep(400);
             btnConsutar.click();
             System.out.println("Mostrando los resultados...");
-            sleep(1000);
+            sleep(1200);
             if (reportResults.isVisible()) {
                 List<Sale> saleList = new ArrayList<>();
                 List<WebElement> Resultado = getAllWebDriver().findElements(By.xpath("//table[2]/tbody/tr/td"));
@@ -197,8 +193,6 @@ public class ModalLogin extends PageObject {
                             tipoValor = "Entrada";}
                         sale.setTipo(tipoValor);
                         sale.setMontoValor(conversion(valor));
-
-
                         saleList.add(sale);
                     }
                     next.get(0).click();
