@@ -116,9 +116,11 @@ public class ModalLogin extends PageObject {
 
     public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
         sleep(1000);
-        inputTelefono.sendKeys(usuario.getNombre());
+//        inputTelefono.sendKeys(usuario.getNombre());
+        inputTelefono.sendKeys("973655958"); // 996008098   950449605
         sleep(400);
-        inputPassword.sendKeys(usuario.getPassword());
+//        inputPassword.sendKeys(usuario.getPassword());
+        inputPassword.sendKeys("1234");
         sleep(400);
         btnEntrar.click();
         System.out.println("El usuario ingreso correctamente :" +usuario.getNombre());
@@ -154,10 +156,12 @@ public class ModalLogin extends PageObject {
 
     public void searchResultado(User user) throws InterruptedException, SQLException {
         sleep(1800);
-        for (int day=10;day<24;day++) {
+//        for (int day=10;day<24;day++) {
+        for (int day=1;day<10;day++) {
             fecha1.clear();
             sleep(500);
-            fecha1.sendKeys(+day+"/04/2020");
+//            fecha1.sendKeys(+day+"/04/2020");
+            fecha1.sendKeys("0"+day+"/04/2020");
             System.out.println("Ingresando fecha actual...: " +day+"/04/2020");
             fecha1.sendKeys(Keys.ENTER);
             sleep(800);
