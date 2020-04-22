@@ -106,6 +106,8 @@ public class ModalLogin extends PageObject {
                 ejecutarPruebas(user);
                 if (errorUser.isVisible()){
                     System.out.println(errorUser.getText());}
+                else
+
                 System.out.println("Ingreso correctamente");
                 searchResultado(user);
             } catch (InterruptedException | SQLException e) {
