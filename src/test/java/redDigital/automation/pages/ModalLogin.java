@@ -106,9 +106,8 @@ public class ModalLogin extends PageObject {
                 ejecutarPruebas(user);
                 if (errorUser.isVisible()){
                     System.out.println(errorUser.getText());}
-
                 else
-                    System.out.println("El usuario ingreso correctamente");
+                    System.out.println("Ingreso correctamente");
                     searchResultado(user);
             } catch (InterruptedException | SQLException e) {
                 e.printStackTrace();
@@ -117,9 +116,12 @@ public class ModalLogin extends PageObject {
     }
 
     public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
-        System.out.println("El pusher es :" +usuario.getNombre());
+        System.out.println("El Pusher es :" +usuario.getNombre());
+        sleep(1000);
         inputTelefono.sendKeys(usuario.getNombre());
+        sleep(200);
         inputPassword.sendKeys(usuario.getPassword());
+        sleep(200);
         btnEntrar.click();
 
     }
@@ -156,14 +158,14 @@ public class ModalLogin extends PageObject {
         sleep(1200);
         for (int day=10;day<24;day++) {
             fecha1.clear();
-            sleep(400);
+            sleep(500);
             fecha1.sendKeys(+day+"/04/2020");
             System.out.println("Ingresando fecha actual...: " +day+"/04/2020");
             fecha1.sendKeys(Keys.ENTER);
-            sleep(400);
+            sleep(800);
             btnConsutar.click();
             System.out.println("Mostrando los resultados...");
-            sleep(1200);
+            sleep(1000);
             if (reportResults.isVisible()) {
                 List<Sale> saleList = new ArrayList<>();
                 List<WebElement> Resultado = getAllWebDriver().findElements(By.xpath("//table[2]/tbody/tr/td"));
