@@ -17,12 +17,13 @@ public class Sale  {
     private String idTerminal;
     private String tipo;
     private BigDecimal montoValor;
+    private String userPusher;
 
     public Sale() {
         
     }
     
-    public Sale(Timestamp fecha, String origen, String destino, String confirmacion, String monto, String carrier, String operacion, String medio, String idTerminal, String tipo, BigDecimal montoValor) {
+    public Sale(Timestamp fecha, String origen, String destino, String confirmacion, String monto, String carrier, String operacion, String medio, String idTerminal, String tipo, BigDecimal montoValor, String userPusher) {
         this.fecha = fecha;
         this.origen = origen;
         this.destino = destino;
@@ -34,6 +35,7 @@ public class Sale  {
         this.idTerminal = idTerminal;
         this.tipo = tipo;
         this.montoValor = montoValor;
+        this.userPusher = userPusher;
     }
 
     public String getTipo() {
@@ -52,7 +54,13 @@ public class Sale  {
         this.montoValor = montoValor;
     }
 
+    public String getUserPusher() {
+        return userPusher;
+    }
 
+    public void setUserPusher(String userPusher) {
+        this.userPusher = userPusher;
+    }
 
     public Timestamp getFecha() {
         return fecha;
