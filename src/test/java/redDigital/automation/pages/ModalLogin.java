@@ -113,34 +113,47 @@ public class ModalLogin extends PageObject {
         return users;
     }
 
-    public void loginRedDigital() throws InterruptedException, SQLException {
-        List<User> usuarios = conexionbd();
-        usuarios.forEach(user -> {
-            try {
-                ejecutarPruebas(user);
-                if (errorUser.isCurrentlyVisible()) {
-                    System.out.println(errorUser.getText());
-                } else {
-                    searchResultado(user);
-                }
-            } catch (InterruptedException | SQLException e) {
-                e.printStackTrace();
-            }
-        });
+//    public void loginRedDigital() throws InterruptedException, SQLException {
+//        List<User> usuarios = conexionbd();
+//        usuarios.forEach(user -> {
+//            try {
+//                ejecutarPruebas(user);
+//                if (errorUser.isCurrentlyVisible()) {
+//                    System.out.println(errorUser.getText());
+//                } else {
+//                    searchResultado(user);
+//                }
+//            } catch (InterruptedException | SQLException e) {
+//                e.printStackTrace();
+//            }
+//        });
+
+        public void loginRedDigital() throws InterruptedException, SQLException {
+            sleep(1000);
+//        inputTelefono.sendKeys(usuario.getNombre());
+            System.out.println("ingrso el siguiente usuario");
+            inputTelefono.sendKeys("954615874");
+            sleep(400);
+//        inputPassword.sendKeys(usuario.getPassword());
+            inputPassword.sendKeys("1234");
+            sleep(400);
+            btnEntrar.click();
+            System.out.println("El usuario ingreso correctamente : 954615874" );
     }
 
-    public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
-        sleep(1000);
-//        inputTelefono.sendKeys(usuario.getNombre());
-        System.out.println("ingrso el siguiente usuario");
-        inputTelefono.sendKeys("954615874");
-        sleep(400);
-//        inputPassword.sendKeys(usuario.getPassword());
-        inputPassword.sendKeys("1234");
-        sleep(400);
-        btnEntrar.click();
-        System.out.println("El usuario ingreso correctamente :" + usuario.getNombre());
-    }
+
+//    public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
+//        sleep(1000);
+////        inputTelefono.sendKeys(usuario.getNombre());
+//        System.out.println("ingrso el siguiente usuario");
+//        inputTelefono.sendKeys("954615874");
+//        sleep(400);
+////        inputPassword.sendKeys(usuario.getPassword());
+//        inputPassword.sendKeys("1234");
+//        sleep(400);
+//        btnEntrar.click();
+//        System.out.println("El usuario ingreso correctamente :" + usuario.getNombre());
+//    }
 
     public void cerrarSesion() throws InterruptedException {
         sleep(500);
