@@ -131,9 +131,11 @@ public class ModalLogin extends PageObject {
 
     public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
         sleep(1000);
-        inputTelefono.sendKeys(usuario.getNombre());
+//        inputTelefono.sendKeys(usuario.getNombre());
+        inputTelefono.sendKeys("954615874");
         sleep(400);
-        inputPassword.sendKeys(usuario.getPassword());
+//        inputPassword.sendKeys(usuario.getPassword());
+        inputPassword.sendKeys("1234");
         sleep(400);
         btnEntrar.click();
         System.out.println("El usuario ingreso correctamente :" + usuario.getNombre());
@@ -321,7 +323,7 @@ public class ModalLogin extends PageObject {
         Timestamp ts = null;
         try {
             st = cn.con.createStatement();
-            rs = st.executeQuery("select max(fecha) from sale where origen = '" + user.getNombre() + "' or destino ='" + user.getNombre() + "'");
+            rs = st.executeQuery("select max(fecha) from sale where userPusher = '" + user.getNombre() + "'");
             while (rs.next()) {
                 System.out.println("la fecha llega aqui");
                 ts = rs.getTimestamp(1);
