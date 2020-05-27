@@ -324,9 +324,9 @@ public class ModalLogin extends PageObject {
             st = cn.con.createStatement();
             rs = st.executeQuery("select max(fecha) from sale where userPusher = '" + user.getNombre() + "'");
             while (rs.next()) {
-                System.out.println("la fecha llega aqui");
+                System.out.println("la fecha actualizada de la BD");
                 ts = rs.getTimestamp(1);
-                System.out.println("la fecha " + ts);
+                System.out.println("la fecha de la web " + ts);
             }
         } catch (Exception e) {
 
