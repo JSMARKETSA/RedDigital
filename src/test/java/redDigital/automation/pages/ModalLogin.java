@@ -100,7 +100,7 @@ public class ModalLogin extends PageObject {
         List<User> users = new ArrayList<>();
         try {
             st = cn.con.createStatement();
-            rs = st.executeQuery("select * from users where activo =1 and fechaActualizada != ''");
+            rs = st.executeQuery("select * from users where usuario ='954615874' and fechaActualizada != ''");
             while (rs.next()) {
                 User user = new User(rs.getString("usuario"), rs.getString("password"), rs.getString("fechaActualizada"));
                 users.add(user);
