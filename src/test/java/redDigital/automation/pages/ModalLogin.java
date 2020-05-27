@@ -100,7 +100,7 @@ public class ModalLogin extends PageObject {
         List<User> users = new ArrayList<>();
         try {
             st = cn.con.createStatement();
-            rs = st.executeQuery("select * from users where usuario ='954615874' and fechaActualizada != ''");
+            rs = st.executeQuery("select * from users where activo =1 and fechaActualizada != ''");
             while (rs.next()) {
                 User user = new User(rs.getString("usuario"), rs.getString("password"), rs.getString("fechaActualizada"));
                 users.add(user);
@@ -127,19 +127,14 @@ public class ModalLogin extends PageObject {
                 e.printStackTrace();
             }
         });
-
-
     }
 
 
     public void ejecutarPruebas(User usuario) throws InterruptedException, SQLException {
         sleep(1000);
-//        inputTelefono.sendKeys(usuario.getNombre());
-        System.out.println("ingrso el siguiente usuario");
-        inputTelefono.sendKeys("954615874");
+        inputTelefono.sendKeys(usuario.getNombre());
         sleep(400);
-//        inputPassword.sendKeys(usuario.getPassword());
-        inputPassword.sendKeys("1234");
+        inputPassword.sendKeys(usuario.getPassword());
         sleep(400);
         btnEntrar.click();
         System.out.println("El usuario ingreso correctamente :" + usuario.getNombre());
