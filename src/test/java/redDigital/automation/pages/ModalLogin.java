@@ -66,6 +66,7 @@ public class ModalLogin extends PageObject {
         public conexion() {
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//              con= DriverManager.getConnection("jdbc:sqlserver://192.168.3.212;databaseName=RedDigital","ROBOTJSMS","R0b0t_JSMS");
                 con= DriverManager.getConnection("jdbc:sqlserver://JSMARKET\\JSMSPROD;databaseName=RedDigital","ROBOTJSMS","R0b0t_JSMS");
                 System.out.println("conexion hecha sqlServer");
             } catch (Exception e) {
